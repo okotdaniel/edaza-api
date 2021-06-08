@@ -15,31 +15,6 @@ def get_db():
     finally:
         db.close()
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
-
-#user routes 
-@app.get("/users/", tags=['user'])
-def getUsers():
-    return {"users": "users here"}
-
-@app.post("/users/{user_id}", tags=['user'])
-def postUser(user_id):
-    return {"message": "account created  successfully"}
-
-@app.put("/user/{user_id}", tags=['user'])
-def updateUser(user_id):
-    return {"message": "user updated successfully"}
-
-@app.delete("/user/{user_id}", tags=['user'])
-def deleteUser(user_id):
-    return {"message": "user deleted successfully "}
 
 #ingridient routes 
 
@@ -69,9 +44,15 @@ def getFoodById(id, db: Session = Depends(get_db), tags=['food']):
     return single_food
 
 @app.put('/food/{id}')
-def updateFood(db: Session = Depends(get_db), tags=['food']):
-    food = db.query(models.Food).filter(models.Food.id == id ).first().update()
+def updateFood(request: schemas.Food, db: Session = Depends(get_db), tags=['food']):
+    food = db.query(models.Food).filter(models.Food.id == id ).first()
+    food.update(request)
+    db.commit()
+    return {"food updated successfully"}
 
 @app.delete('/food/{id}')
 def deleteFood(id, db: Session = Depends(get_db), tags=['food'], status_code=203):
-    food = db.query(models.Food).filter(models.Food.id == id ).delete()
+    food = db.query(models.Food).filter(models.Food.id == id )
+    food.delete(synchronize_session=False)
+    db.commit()
+    return {"message": "deleted successfully"}
