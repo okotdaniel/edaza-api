@@ -25,13 +25,6 @@ class Item(Base):
     owner = relationship("User", back_populates="items")
 
 
-class Recipe(Base):
-
-    __tablename__ = "Recipe"
-
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
-
 
 class Food(Base):
 
@@ -44,6 +37,27 @@ class Food(Base):
     category = Column(String, index=True) 
     mode_of_preparation = Column(String, index=True)
 
+class Recipe(Base):
+    
+    __tablename__ = "Recipe"
 
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String, index=True)
+    temperature = Column(String, index=True)
+    time = Column(String, index=True)
+    tags = Column(String, index=True)
+    indgridients = Column(String, index=True)
+    level = Column(String, index=True)
+    rating = Column(String, index=True)
+    description = Column(String, index=True)
 
+class Drinks(Base):
+    __tablename__ = "Drinks"
 
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String, index=True)
+    temperature = Column(String, index=True)
+    time = Column(String, index=True)
+    indgridients = Column(String, index=True)
+    level = Column(String, index=True)
+    rating = Column(String, index=True)

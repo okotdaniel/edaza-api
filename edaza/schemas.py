@@ -1,17 +1,13 @@
 from pydantic import BaseModel
 from typing import List, Optional
 
-class ItemBase(BaseModel):
-    title: str
-    description: Optional[str] = None
+class Food(BaseModel):
 
-
-class ItemCreate(ItemBase):
-    pass
-
-class Item(ItemBase):
-    id: int
-    owner_id: int
+    name: str
+    picture: str
+    type: str
+    category: str
+    mode_of_preparation: str
 
     class Config:
         orm_mode = True
@@ -27,16 +23,7 @@ class UserCreate(UserBase):
 class User(UserBase):
     id: int
     is_active: bool
-    items: List[Item] = []
-
+    
     class Config:
         orm_mode = True
 
-
-class Food(BaseModel):
-
-    name: str
-    picture: str
-    type: str
-    category: str
-    mode_of_preparation: str
