@@ -1,11 +1,8 @@
 from fastapi import FastAPI, Depends
 from typing import Optional
 from sqlalchemy.orm import Session
+from edaza import schemas, models, database
 
-
-
-
-from edaza import models, schemas, database
 get_db = database.get_db
 
 

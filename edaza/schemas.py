@@ -13,6 +13,24 @@ class Food(BaseModel):
         orm_mode = True
 
 
+class Drink(BaseModel):
+
+    title: str
+    prep: str
+    cook: str
+    total_time: str
+    yields: str
+    no_of_recipe: str
+    tags: str
+    indgridients: str
+    level: str
+    rating: str
+    drink_time: str
+    drink_type: str
+    description: str
+
+    class Config:
+        orm_mode = True
 
 class UserBase(BaseModel):
     email: str

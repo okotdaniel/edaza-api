@@ -2,30 +2,6 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 from edaza.database import Base
 
-
-class User(Base):
-    __tablename__ = "users"
-
-    id = Column(Integer, primary_key=True, index=True)
-    email = Column(String, unique=True, index=True)
-    hashed_password = Column(String)
-    is_active = Column(Boolean, default=True)
-
-    items = relationship("Item", back_populates="owner")
-
-
-class Item(Base):
-    __tablename__ = "items"
-
-    id = Column(Integer, primary_key=True, index=True)
-    title = Column(String, index=True)
-    description = Column(String, index=True)
-    
-    owner_id = Column(Integer, ForeignKey("users.id"))
-    owner = relationship("User", back_populates="items")
-
-
-
 class Food(Base):
 
     __tablename__ = "Food"
@@ -43,21 +19,42 @@ class Recipe(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, index=True)
-    temperature = Column(String, index=True)
     time = Column(String, index=True)
+    total_time = Column(String, index=True)
+    yields = Column(String, index=True)
+    no_of_recipe = Column(String, index=True)
     tags = Column(String, index=True)
     indgridients = Column(String, index=True)
     level = Column(String, index=True)
     rating = Column(String, index=True)
+    dish_type = Column(String, index=True)
+    meal_type = Column(String, index=True)
     description = Column(String, index=True)
 
-class Drinks(Base):
-    __tablename__ = "Drinks"
+class Drink(Base):
+
+    __tablename__ = "Drink"
 
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, index=True)
-    temperature = Column(String, index=True)
-    time = Column(String, index=True)
+    prep = Column(String, index=True)
+    cook = Column(String, index=True)
+    total_time = Column(String, index=True)
+    yields = Column(String, index=True)
+    no_of_recipe = Column(String, index=True)
+    tags = Column(String, index=True)
     indgridients = Column(String, index=True)
     level = Column(String, index=True)
     rating = Column(String, index=True)
+    drink_time = Column(String, index=True)
+    drink_type = Column(String, index=True)
+    description = Column(String, index=True)
+
+
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, unique=True, index=True)
+    hashed_password = Column(String)
+    is_active = Column(Boolean, default=True)
